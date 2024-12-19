@@ -1,6 +1,6 @@
-import { CreateVerificationTokenDto } from "../dtos/verfy-token.dto";
-
 import { VerificationTokenEntity } from "~/.server/domain/entites/verify-token";
+
+import { CreateVerificationTokenDto } from "../dtos/verfy-token.dto";
 
 export interface IVerifyTokenRepository {
   create(

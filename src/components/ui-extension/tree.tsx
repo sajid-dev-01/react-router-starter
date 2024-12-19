@@ -1,5 +1,5 @@
-import { Minus } from "lucide-react";
 import { Fragment, useCallback, useState } from "react";
+import { Minus } from "lucide-react";
 
 import { Checkbox } from "~/components/ui/checkbox";
 

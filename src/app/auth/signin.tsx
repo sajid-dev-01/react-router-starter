@@ -1,35 +1,30 @@
 import { createCookie, data, useFetcher } from "react-router";
 
+import { SignInSchema } from "~/.server/application/dtos/auth.dto";
+import { getInstance } from "~/.server/container";
+import { signInController } from "~/.server/infrastructure/modules/auth/controller";
 import SignInForm from "~/features/auth/components/sign-in";
 import { createActionHandler } from "~/lib/action-handler";
 
 import { Route } from "../+types";
 
-import { SignInSchema } from "~/.server/application/dtos/auth.dto";
-import { getInstance } from "~/.server/container";
-
 export async function action(args: Route.ActionArgs) {
-  createActionHandler({ args, schema: SignInSchema }).handle(
-    async ({ json }) => {
-      const headers = args.request.headers;
-      const signInController = getInstance("ISignInController");
+  const instrumentationService = getInstance("IInstrumentationService");
+  instrumentationService.instrumentServerAction(
+    "signIn",
+    { recordResponse: true },
+    async () => {
+      return createActionHandler({ args, schema: SignInSchema }).handle(
+        async ({ json }) => {
+          const { session, cookie } = await signInController(json);
 
-      if ("id" in user) {
-        const { session } = await createSession(user.id, {
-          ipAddress: headers.get("X-Forwarded-For"),
-          userAgent: {},
-        });
+          if ("userId" in session) {
+            createCookie(cookie.name, cookie.attributes);
+          }
 
-        createCookie(SESSION_COOKIE, {
-          httpOnly: true,
-          sameSite: "lax",
-          // secure: serverEnv.NODE_ENV === "production",
-          expires: session.expiresAt,
-          path: "/",
-        });
-      }
-
-      return data({ data: user });
+          return data({ message: "Sign in successfull" });
+        }
+      );
     }
   );
 }

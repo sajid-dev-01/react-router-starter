@@ -1,3 +1,10 @@
+import {
+  HttpError,
+  NotFoundError,
+  NotVerifiedError,
+  TokenError,
+} from "~/.server/domain/errors";
+
 import { IInstrumentationService } from "../common/services/instrumentation";
 import {
   ForgotPasswordDto,
@@ -11,13 +18,6 @@ import type { IUserRepository } from "../repositories/user.repo";
 import { IVerifyTokenRepository } from "../repositories/verify-token.repo";
 import { IAuthenticationService } from "../services/auth/auth";
 import { IOtpService } from "../services/auth/otp";
-
-import {
-  HttpError,
-  NotFoundError,
-  NotVerifiedError,
-  TokenError,
-} from "~/.server/domain/errors";
 
 export type ISignUpUseCase = ReturnType<typeof signUpUseCase>;
 export const signUpUseCase =

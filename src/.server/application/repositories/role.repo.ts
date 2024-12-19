@@ -1,6 +1,6 @@
-import { CreateRoleDto, UpdateRoleDto } from "../dtos/role.dto";
-
 import { RoleEntity, RoleName } from "~/.server/domain/entites/role";
+
+import { CreateRoleDto, UpdateRoleDto } from "../dtos/role.dto";
 
 export interface IRoleRepository {
   create(

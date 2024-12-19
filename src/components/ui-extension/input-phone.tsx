@@ -1,7 +1,7 @@
-import { ChevronDownIcon, PhoneIcon } from "lucide-react";
 import React from "react";
 import * as RPNInput from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
+import { ChevronDownIcon, PhoneIcon } from "lucide-react";
 
 import { Input } from "~/components/ui/input";
 

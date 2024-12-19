@@ -1,9 +1,9 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { DI_SYMBOLS } from "../types";
-
 import { MockTransactionManagerService } from "~/.server/infrastructure/common/services/transaction-manager.mock";
 import { TransactionManagerService } from "~/.server/infrastructure/common/services/transaction-manger";
+
+import { DI_SYMBOLS } from "../types";
 
 export function createTransactionManagerModule() {
   const transactionManagerModule = createModule();

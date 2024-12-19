@@ -41,12 +41,8 @@ export default [
           groups: [
             [`^(${builtinModules.join("|")})(/|$)`],
             ["server-only"],
-            [
-              // '^react',
-              "^@?\\w",
-              "^~?\\w",
-            ],
-            ["^~/\\w", "^@/\\w"],
+            ["^react", "^@?\\w"],
+            ["^~/*", "^@/*"],
             ["^components(/.*|$)"],
             ["^\\."],
             ["^.+\\.s?css$"],

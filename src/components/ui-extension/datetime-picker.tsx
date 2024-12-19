@@ -1,3 +1,6 @@
+import * as React from "react";
+import { useImperativeHandle, useRef } from "react";
+import { DayPicker } from "react-day-picker";
 import { add, format } from "date-fns";
 import { enUS, type Locale } from "date-fns/locale";
 import {
@@ -6,9 +9,6 @@ import {
   ChevronRight,
   Clock,
 } from "lucide-react";
-import * as React from "react";
-import { useImperativeHandle, useRef } from "react";
-import { DayPicker } from "react-day-picker";
 
 import { Button, buttonVariants } from "~/components/ui/button";
 import type { CalendarProps } from "~/components/ui/calendar";

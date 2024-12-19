@@ -1,7 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRightIcon, CheckCircleIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRightIcon, CheckCircleIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import {

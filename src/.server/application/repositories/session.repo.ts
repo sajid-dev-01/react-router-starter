@@ -1,6 +1,6 @@
-import { CreateSessionDto, UpdateSessionDto } from "../dtos/session.dto";
-
 import { SessionEntity } from "~/.server/domain/entites/session";
+
+import { CreateSessionDto, UpdateSessionDto } from "../dtos/session.dto";
 
 export interface ISessionRepository {
   create(

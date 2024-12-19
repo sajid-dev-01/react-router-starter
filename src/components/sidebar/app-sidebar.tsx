@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -10,7 +11,6 @@ import {
   Settings2,
   SquareTerminal,
 } from "lucide-react";
-import * as React from "react";
 
 import {
   Sidebar,

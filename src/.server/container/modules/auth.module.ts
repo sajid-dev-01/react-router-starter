@@ -1,7 +1,5 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { DI_SYMBOLS } from "../types";
-
 import {
   forgotPasswordUseCase,
   resetPasswordUseCase,
@@ -12,6 +10,8 @@ import {
 } from "~/.server/application/use-cases/auth.use-case";
 import { serverEnv } from "~/.server/env/server-env";
 import { AuthenticationService } from "~/.server/infrastructure/modules/auth/services/auth";
+
+import { DI_SYMBOLS } from "../types";
 
 export function createAuthModule() {
   const authModule = createModule();
@@ -37,7 +37,6 @@ export function createAuthModule() {
       DI_SYMBOLS.IRoleRepository,
       DI_SYMBOLS.IUserRepository,
     ]);
-
   authModule
     .bind(DI_SYMBOLS.IVerifyEmailUseCase)
     .toHigherOrderFunction(verifyEmailUseCase, [

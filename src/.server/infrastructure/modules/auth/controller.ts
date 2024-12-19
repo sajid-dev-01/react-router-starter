@@ -5,10 +5,12 @@ export type ISignInController = ReturnType<typeof signInController>;
 
 export const signUpController = async (dto: SignUpDto) => {
   const signUpUseCase = getInstance("ISignUpUseCase");
-  signUpUseCase;
+
+  return signUpUseCase(dto);
 };
 
-export const signInController = async (input: SignInDto) => {
+export const signInController = async (dto: SignInDto) => {
   const signInUseCase = getInstance("ISignInUseCase");
-  signInUseCase;
+
+  return signInUseCase(dto);
 };

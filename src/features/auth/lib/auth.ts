@@ -1,7 +1,7 @@
 import "server-only";
 
-import { GitHub, Google } from "arctic";
 import { cache } from "react";
+import { GitHub, Google } from "arctic";
 
 import { authConfig } from "~/configs/auth-config";
 import { validateSessionToken } from "~/services/auth-service";

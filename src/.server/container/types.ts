@@ -15,7 +15,6 @@ import {
   ISignUpUseCase,
   IVerifyEmailUseCase,
 } from "../application/use-cases/auth.use-case";
-import { ISignInController } from "../infrastructure/modules/auth/controller";
 
 export const DI_SYMBOLS = {
   // Repositories
@@ -39,11 +38,6 @@ export const DI_SYMBOLS = {
   ISignOutUseCase: Symbol.for("ISignOutUseCase"),
   IForgotPasswordUseCase: Symbol.for("IForgotPasswordUseCase"),
   IResetPasswordUseCase: Symbol.for("IResetPasswordUseCase"),
-
-  // Controllers
-  ISignInController: Symbol.for("ISignInController"),
-  ISignOutController: Symbol.for("ISignOutController"),
-  ISignUpController: Symbol.for("ISignUpController"),
 };
 
 export interface DI_RETURN_TYPES {
@@ -70,7 +64,4 @@ export interface DI_RETURN_TYPES {
   IResetPasswordUseCase: IResetPasswordUseCase;
   // - role
   // - user
-
-  // Controllers
-  ISignInController: ISignInController;
 }

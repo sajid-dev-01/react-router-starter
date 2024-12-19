@@ -1,9 +1,9 @@
 import { data } from "react-router";
 import { z } from "zod";
 
-import { Route } from "../+types/root";
-
 import { HttpError, ValidationError } from "~/.server/domain/errors";
+
+import { Route } from "../+types/root";
 
 const SERVER_ERROR_MESSSAGE = "Inernal server error";
 

@@ -1,4 +1,3 @@
-import { Trash2 as RemoveIcon } from "lucide-react";
 import {
   createContext,
   Dispatch,
@@ -16,6 +15,7 @@ import {
   FileRejection,
   useDropzone,
 } from "react-dropzone";
+import { Trash2 as RemoveIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { buttonVariants } from "~/components/ui/button";

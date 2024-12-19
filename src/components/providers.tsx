@@ -1,5 +1,5 @@
-import { NuqsAdapter } from "nuqs/adapters/react";
 import { PropsWithChildren } from "react";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 import { ThemeProvider } from "~/contexts/theme-context";
 

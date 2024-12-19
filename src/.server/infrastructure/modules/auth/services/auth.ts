@@ -1,7 +1,5 @@
 import bcrypt from "bcryptjs";
 
-import VerifyOTPEmail from "~/emails/verify-otp";
-
 import { IEmailService } from "~/.server/application/common/services/email";
 import { ISessionRepository } from "~/.server/application/repositories/session.repo";
 import { IUserRepository } from "~/.server/application/repositories/user.repo";
@@ -10,11 +8,13 @@ import { IAuthenticationService } from "~/.server/application/services/auth/auth
 import { IOtpService } from "~/.server/application/services/auth/otp";
 import { appConfig } from "~/.server/configs/app-config";
 import { authConfig } from "~/.server/configs/auth-config";
+import { SESSION_COOKIE } from "~/.server/constants";
 import { CookieEntity } from "~/.server/domain/entites/cookie";
 import { SessionEntity } from "~/.server/domain/entites/session";
 import { UserEntity } from "~/.server/domain/entites/user";
 import { AuthenticationError } from "~/.server/domain/errors";
 import { generateSessionId, generateSessionToken } from "~/.server/lib/session";
+import VerifyOTPEmail from "~/emails/verify-otp";
 
 const SESSION_REFRESH_INTERVAL_MS = 1000 * 60 * 60 * 24 * 15; // 15 days
 const SESSION_MAX_DURATION_MS = SESSION_REFRESH_INTERVAL_MS * 2;
@@ -84,7 +84,7 @@ export class AuthenticationService implements IAuthenticationService {
     });
 
     const cookie: CookieEntity = {
-      name: "session",
+      name: SESSION_COOKIE,
       value: token,
       attributes: {
         httpOnly: true,

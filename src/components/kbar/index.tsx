@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   KBarAnimator,
   KBarPortal,
@@ -5,7 +6,6 @@ import {
   KBarProvider,
   KBarSearch,
 } from "kbar";
-import { useMemo } from "react";
 
 import { navData } from "../sidebar/app-sidebar";
 import { RenderResults } from "./render-result";

@@ -1,6 +1,6 @@
-import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto";
-
 import { UserEntity } from "~/.server/domain/entites/user";
+
+import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto";
 
 export interface IUserRepository {
   findById(id: string): Promise<UserEntity | undefined>;
