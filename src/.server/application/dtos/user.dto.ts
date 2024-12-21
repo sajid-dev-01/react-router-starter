@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { userEntitySchemar } from "~/.server/domain/entites/user";
+import { userEntitySchema } from "~/.server/domain/entites/user";
 
-export const createUserSchema = userEntitySchemar.omit({
+export const createUserSchema = userEntitySchema.omit({
   id: true,
   createdAt: true,
   updatedAt: true,

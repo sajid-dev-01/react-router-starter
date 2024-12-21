@@ -1,12 +1,12 @@
-import { ICrashReporterService } from "../application/common/services/crash-reaporter";
-import { IEmailService } from "../application/common/services/email";
-import { IInstrumentationService } from "../application/common/services/instrumentation";
-import { ITransactionManagerService } from "../application/common/services/transaction-manager";
-import { ISessionRepository } from "../application/repositories/session.repo";
-import { IUserRepository } from "../application/repositories/user.repo";
-import { IVerifyTokenRepository } from "../application/repositories/verify-token.repo";
-import { IAuthenticationService } from "../application/services/auth/auth";
-import { IOtpService } from "../application/services/auth/otp";
+import { IAuthenticationService } from "../application/abstruct/infrastructure/auth";
+import { ICrashReporterService } from "../application/abstruct/infrastructure/crash-reaporter";
+import { IEmailService } from "../application/abstruct/infrastructure/email";
+import { IInstrumentationService } from "../application/abstruct/infrastructure/instrumentation";
+import { IOtpService } from "../application/abstruct/infrastructure/otp";
+import { ITransactionManagerService } from "../application/abstruct/persistence/transaction-manager";
+import { ISessionRepository } from "../application/abstruct/repositories/session.repo";
+import { IUserRepository } from "../application/abstruct/repositories/user.repo";
+import { IVerifyTokenRepository } from "../application/abstruct/repositories/verify-token.repo";
 import {
   IForgotPasswordUseCase,
   IResetPasswordUseCase,
@@ -14,7 +14,7 @@ import {
   ISignOutUseCase,
   ISignUpUseCase,
   IVerifyEmailUseCase,
-} from "../application/use-cases/auth.use-case";
+} from "../application/use-case/auth";
 
 export const DI_SYMBOLS = {
   // Repositories
@@ -62,6 +62,6 @@ export interface DI_RETURN_TYPES {
   ISignOutUseCase: ISignOutUseCase;
   IForgotPasswordUseCase: IForgotPasswordUseCase;
   IResetPasswordUseCase: IResetPasswordUseCase;
-  // - role
-  // - user
+// - role
+// - user
 }

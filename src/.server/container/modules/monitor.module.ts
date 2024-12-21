@@ -1,9 +1,9 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { CrashReporterService } from "~/.server/infrastructure/common/services/crash-reporter";
-import { MockCrashReporterService } from "~/.server/infrastructure/common/services/crash-reporter.mock";
-import { InstrumentationService } from "~/.server/infrastructure/common/services/instrumentation";
-import { MockInstrumentationService } from "~/.server/infrastructure/common/services/instrumentation.mock";
+import { CrashReporterService } from "~/.server/infrastructure/monitoring/crash-reporter";
+import { MockCrashReporterService } from "~/.server/infrastructure/monitoring/crash-reporter.mock";
+import { InstrumentationService } from "~/.server/infrastructure/monitoring/instrumentation";
+import { MockInstrumentationService } from "~/.server/infrastructure/monitoring/instrumentation.mock";
 
 import { DI_SYMBOLS } from "../types";
 

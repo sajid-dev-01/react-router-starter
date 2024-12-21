@@ -1,7 +1,7 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { MockTransactionManagerService } from "~/.server/infrastructure/common/services/transaction-manager.mock";
-import { TransactionManagerService } from "~/.server/infrastructure/common/services/transaction-manger";
+import { MockTransactionManagerService } from "~/.server/persistence/transaction-manager.mock";
+import { TransactionManagerService } from "~/.server/persistence/transaction-manger";
 
 import { DI_SYMBOLS } from "../types";
 

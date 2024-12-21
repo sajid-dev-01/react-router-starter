@@ -1,17 +1,10 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import {
-  forgotPasswordUseCase,
-  resetPasswordUseCase,
-  signInUseCase,
-  signOutUseCase,
-  signUpUseCase,
-  verifyEmailUseCase,
-} from "~/.server/application/use-cases/auth.use-case";
 import { serverEnv } from "~/.server/env/server-env";
-import { AuthenticationService } from "~/.server/infrastructure/modules/auth/services/auth";
+import { AuthenticationService } from "~/.server/infrastructure/auth/auth.service.mock";
 
 import { DI_SYMBOLS } from "../types";
+import { signUpUseCase, verifyEmailUseCase, signInUseCase, signOutUseCase, forgotPasswordUseCase, resetPasswordUseCase } from "~/.server/application/use-case/auth";
 
 export function createAuthModule() {
   const authModule = createModule();

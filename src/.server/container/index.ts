@@ -1,6 +1,6 @@
 import { createContainer } from "@evyweb/ioctopus";
 
-import { IInstrumentationService } from "../application/common/services/instrumentation";
+import { IInstrumentationService } from "../application/abstruct/infrastructure/instrumentation";
 import { createAuthModule } from "./modules/auth.module";
 import { createTransactionManagerModule } from "./modules/db.module";
 import { createMonitorModule } from "./modules/monitor.module";

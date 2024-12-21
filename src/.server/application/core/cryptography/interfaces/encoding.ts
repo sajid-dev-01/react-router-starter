@@ -1,0 +1,4 @@
+export interface IEncodingService {
+  encode(data: Uint8Array): Uint8Array;
+  decode(data: Uint8Array): Uint8Array;
+}
