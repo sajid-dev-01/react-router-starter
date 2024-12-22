@@ -2,12 +2,12 @@ import { sha256 } from "@oslojs/crypto/sha2";
 import { decodeBase64, encodeBase64 } from "@oslojs/encoding";
 import { generateHOTP, verifyHOTP } from "@oslojs/otp";
 
-import { IOtpService } from "~/.server/application/abstruct/infrastructure/otp";
+import { IOtpService } from "~/.server/application/abstruct/infrastructure/otp.service";
 import { IEncryptiohnService } from "~/.server/application/core/cryptography/interfaces/encryption";
 import { createRandomString } from "~/.server/lib/helpers";
 
 export class OtpService implements IOtpService {
-  constructor(private encryptionService: IEncryptiohnService) { }
+  constructor(private encryptionService: IEncryptiohnService) {}
 
   generateHOTP() {
     const str = createRandomString(32);

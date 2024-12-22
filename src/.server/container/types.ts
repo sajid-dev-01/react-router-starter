@@ -1,8 +1,8 @@
-import { IAuthenticationService } from "../application/abstruct/infrastructure/auth";
-import { ICrashReporterService } from "../application/abstruct/infrastructure/crash-reaporter";
-import { IEmailService } from "../application/abstruct/infrastructure/email";
-import { IInstrumentationService } from "../application/abstruct/infrastructure/instrumentation";
-import { IOtpService } from "../application/abstruct/infrastructure/otp";
+import { IAuthenticationService } from "../application/abstruct/infrastructure/auth.service";
+import { ICrashReporterService } from "../application/abstruct/infrastructure/crash-reaporter.service";
+import { IEmailService } from "../application/abstruct/infrastructure/email.service";
+import { IInstrumentationService } from "../application/abstruct/infrastructure/instrumentation.service";
+import { IOtpService } from "../application/abstruct/infrastructure/otp.service";
 import { ITransactionManagerService } from "../application/abstruct/persistence/transaction-manager";
 import { ISessionRepository } from "../application/abstruct/repositories/session.repo";
 import { IUserRepository } from "../application/abstruct/repositories/user.repo";
@@ -62,6 +62,6 @@ export interface DI_RETURN_TYPES {
   ISignOutUseCase: ISignOutUseCase;
   IForgotPasswordUseCase: IForgotPasswordUseCase;
   IResetPasswordUseCase: IResetPasswordUseCase;
-// - role
-// - user
+  // - role
+  // - user
 }

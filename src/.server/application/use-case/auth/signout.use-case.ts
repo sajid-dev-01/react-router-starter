@@ -1,5 +1,5 @@
-import { IAuthenticationService } from "../../abstruct/infrastructure/auth";
-import { IInstrumentationService } from "../../abstruct/infrastructure/instrumentation";
+import { IAuthenticationService } from "../../abstruct/infrastructure/auth.service";
+import { IInstrumentationService } from "../../abstruct/infrastructure/instrumentation.service";
 import { IUserRepository } from "../../abstruct/repositories/user.repo";
 import { VerifyEmailDto } from "../../dtos/auth.dto";
 
@@ -10,12 +10,11 @@ export const signOutUseCase =
     authService: IAuthenticationService,
     userRepository: IUserRepository
   ) =>
-    async (email: string, dto: VerifyEmailDto) => {
-      return instrumentationService.startSpan(
-        { name: "signOutUseCase", op: "function" },
-        async () => {
-          // TODO: implement sign out features
-        }
-      );
-    };
-
+  async (email: string, dto: VerifyEmailDto) => {
+    return instrumentationService.startSpan(
+      { name: "signOutUseCase", op: "function" },
+      async () => {
+        // TODO: implement sign out features
+      }
+    );
+  };

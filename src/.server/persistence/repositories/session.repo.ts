@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
-import { ICrashReporterService } from "~/.server/application/abstruct/infrastructure/crash-reaporter";
-import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation";
+import { ICrashReporterService } from "~/.server/application/abstruct/infrastructure/crash-reaporter.service";
+import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation.service";
 import { ISessionRepository } from "~/.server/application/abstruct/repositories/session.repo";
 import {
   CreateSessionDto,

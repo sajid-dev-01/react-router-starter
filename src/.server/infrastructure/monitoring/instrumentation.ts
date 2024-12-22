@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/nextjs";
 
-import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation";
+import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation.service";
 
 export class InstrumentationService implements IInstrumentationService {
   startSpan<T>(

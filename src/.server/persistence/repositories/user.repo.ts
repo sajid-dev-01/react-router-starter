@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
-import { ICrashReporterService } from "~/.server/application/abstruct/infrastructure/crash-reaporter";
-import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation";
+import { ICrashReporterService } from "~/.server/application/abstruct/infrastructure/crash-reaporter.service";
+import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation.service";
 import { IUserRepository } from "~/.server/application/abstruct/repositories/user.repo";
 import {
   CreateUserDto,

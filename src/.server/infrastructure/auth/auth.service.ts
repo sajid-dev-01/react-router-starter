@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 
-import { IAuthenticationService } from "~/.server/application/abstruct/infrastructure/auth";
-import { IEmailService } from "~/.server/application/abstruct/infrastructure/email";
-import { IOtpService } from "~/.server/application/abstruct/infrastructure/otp";
+import { IAuthenticationService } from "~/.server/application/abstruct/infrastructure/auth.service";
+import { IEmailService } from "~/.server/application/abstruct/infrastructure/email.service";
+import { IOtpService } from "~/.server/application/abstruct/infrastructure/otp.service";
 import { ISessionRepository } from "~/.server/application/abstruct/repositories/session.repo";
 import { IUserRepository } from "~/.server/application/abstruct/repositories/user.repo";
 import { IVerifyTokenRepository } from "~/.server/application/abstruct/repositories/verify-token.repo";
@@ -21,12 +21,12 @@ const SESSION_MAX_DURATION_MS = SESSION_REFRESH_INTERVAL_MS * 2;
 
 export class AuthenticationService implements IAuthenticationService {
   constructor(
-    private readonly _otpService: IOtpService,
-    private readonly _emailService: IEmailService,
-    private readonly _userRepository: IUserRepository,
-    private readonly _verifyTokenRepository: IVerifyTokenRepository,
-    private readonly _sessionRepository: ISessionRepository
-  ) { }
+    private readonly otpService: IOtpService,
+    private readonly emailService: IEmailService,
+    private readonly userRepository: IUserRepository,
+    private readonly verifyTokenRepository: IVerifyTokenRepository,
+    private readonly sessionRepository: ISessionRepository
+  ) {}
 
   async validatePasswords({
     password,
@@ -42,17 +42,17 @@ export class AuthenticationService implements IAuthenticationService {
     token: string
   ): Promise<{ user: UserEntity; session: SessionEntity }> {
     const sessionId = generateSessionId(token);
-    const sessionInDb = await this._sessionRepository.findById(sessionId);
+    const sessionInDb = await this.sessionRepository.findById(sessionId);
     if (!sessionInDb) throw new AuthenticationError();
 
     if (Date.now() >= sessionInDb.expiresAt.getTime()) {
-      await this._sessionRepository.deleteById(sessionInDb.id);
+      await this.sessionRepository.deleteById(sessionInDb.id);
       throw new AuthenticationError();
     }
 
-    const user = await this._userRepository.findById(sessionInDb.userId);
+    const user = await this.userRepository.findById(sessionInDb.userId);
     if (!user) {
-      await this._sessionRepository.deleteById(sessionInDb.id);
+      await this.sessionRepository.deleteById(sessionInDb.id);
       throw new AuthenticationError();
     }
 
@@ -61,7 +61,7 @@ export class AuthenticationService implements IAuthenticationService {
       sessionInDb.expiresAt.getTime() - SESSION_REFRESH_INTERVAL_MS
     ) {
       sessionInDb.expiresAt = new Date(Date.now() + SESSION_MAX_DURATION_MS);
-      await this._sessionRepository.updateById(sessionInDb.id, {
+      await this.sessionRepository.updateById(sessionInDb.id, {
         expiresAt: sessionInDb.expiresAt,
       });
     }
@@ -74,7 +74,7 @@ export class AuthenticationService implements IAuthenticationService {
   ): Promise<{ session: SessionEntity; cookie: CookieEntity }> {
     const token = generateSessionToken();
     const sessionId = generateSessionId(token);
-    const session = await this._sessionRepository.create({
+    const session = await this.sessionRepository.create({
       id: sessionId,
       userId: user.id,
       expiresAt: new Date(Date.now() + SESSION_MAX_DURATION_MS),
@@ -102,37 +102,37 @@ export class AuthenticationService implements IAuthenticationService {
   async invalidateSession(
     sessionId: SessionEntity["id"]
   ): Promise<{ blankCookie: CookieEntity }> {
-    await this._sessionRepository.deleteById(sessionId);
+    await this.sessionRepository.deleteById(sessionId);
     // TODO: update secure property
     return { blankCookie: { name: "session", value: "", attributes: {} } };
   }
 
   async isVerifyEmailSent(email: string): Promise<boolean> {
-    const existingToken = await this._verifyTokenRepository.findByEmail(email);
+    const existingToken = await this.verifyTokenRepository.findByEmail(email);
     if (existingToken) {
       // return true if verification token not expired
       if (existingToken.expiresAt >= new Date()) return true;
       // delete record if verification token expired
-      await this._verifyTokenRepository.deleteByEmail(email);
+      await this.verifyTokenRepository.deleteByEmail(email);
     }
 
     return false;
   }
 
   async sendVerifyEmail(email: string): Promise<void> {
-    const { encryptedKey, otp } = this._otpService.generateHOTP();
+    const { encryptedKey, otp } = this.otpService.generateHOTP();
     const expiresAt = new Date(
       Date.now() + authConfig.email.confirmationExpires
     );
 
-    await this._verifyTokenRepository.create({
+    await this.verifyTokenRepository.create({
       email,
       type: "email",
       token: encryptedKey,
       expiresAt,
     });
 
-    await this._emailService.sendEmail({
+    await this.emailService.sendEmail({
       email,
       subject: `Verify your email for ${appConfig.name}`,
       body: VerifyOTPEmail({
@@ -147,6 +147,6 @@ export class AuthenticationService implements IAuthenticationService {
   }
 
   async deleteVerifyEmail(email: string): Promise<void> {
-    await this._verifyTokenRepository.deleteByEmail(email);
+    await this.verifyTokenRepository.deleteByEmail(email);
   }
 }

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
-import { ICrashReporterService } from "~/.server/application/abstruct/infrastructure/crash-reaporter";
-import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation";
+import { ICrashReporterService } from "~/.server/application/abstruct/infrastructure/crash-reaporter.service";
+import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation.service";
 import { IVerifyTokenRepository } from "~/.server/application/abstruct/repositories/verify-token.repo";
 import { CreateVerificationTokenDto } from "~/.server/application/dtos/verfy-token.dto";
 import { VerificationTokenEntity } from "~/.server/domain/entites/verify-token";

@@ -1,7 +1,7 @@
 //import { Resend } from "resend";
 import { JSX } from "react";
 
-import { IEmailService } from "~/.server/application/abstruct/infrastructure/email";
+import { IEmailService } from "~/.server/application/abstruct/infrastructure/email.service";
 import { emailConfig } from "~/.server/configs/email-config";
 
 // const resend = new Resend(env.RESEND_API_KEY);

@@ -1,4 +1,4 @@
-import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation";
+import { IInstrumentationService } from "~/.server/application/abstruct/infrastructure/instrumentation.service";
 
 export class MockInstrumentationService implements IInstrumentationService {
   startSpan<T>(

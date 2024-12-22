@@ -1,8 +1,12 @@
-import { HttpError, NotFoundError, NotVerifiedError } from "~/.server/domain/exceptions";
+import {
+  HttpError,
+  NotFoundError,
+  NotVerifiedError,
+} from "~/.server/domain/exceptions";
 import { SignInDto } from "~/features/auth/schemas";
 
-import { IAuthenticationService } from "../../abstruct/infrastructure/auth";
-import { IInstrumentationService } from "../../abstruct/infrastructure/instrumentation";
+import { IAuthenticationService } from "../../abstruct/infrastructure/auth.service";
+import { IInstrumentationService } from "../../abstruct/infrastructure/instrumentation.service";
 import { IUserRepository } from "../../abstruct/repositories/user.repo";
 
 export type ISignInUseCase = ReturnType<typeof signInUseCase>;
@@ -12,29 +16,28 @@ export const signInUseCase =
     authService: IAuthenticationService,
     userRepository: IUserRepository
   ) =>
-    async (dto: SignInDto) => {
-      return instrumentationService.startSpan(
-        { name: "signInUseCase", op: "function" },
-        async () => {
-          const existingUser = await userRepository.findByEmail(dto.email);
-          if (!existingUser || !existingUser.password) {
-            throw new NotFoundError();
-          }
-
-          if (!existingUser.emailVerified) {
-            throw new NotVerifiedError();
-          }
-
-          const validPassword = await authService.validatePasswords({
-            password: dto.password,
-            hash: existingUser.password,
-          });
-          if (!validPassword) {
-            throw new HttpError("Invalid credentials!");
-          }
-
-          return await authService.createSession(existingUser);
+  async (dto: SignInDto) => {
+    return instrumentationService.startSpan(
+      { name: "signInUseCase", op: "function" },
+      async () => {
+        const existingUser = await userRepository.findByEmail(dto.email);
+        if (!existingUser || !existingUser.password) {
+          throw new NotFoundError();
         }
-      );
-    };
 
+        if (!existingUser.emailVerified) {
+          throw new NotVerifiedError();
+        }
+
+        const validPassword = await authService.validatePasswords({
+          password: dto.password,
+          hash: existingUser.password,
+        });
+        if (!validPassword) {
+          throw new HttpError("Invalid credentials!");
+        }
+
+        return await authService.createSession(existingUser);
+      }
+    );
+  };
