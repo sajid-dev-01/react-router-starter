@@ -1,5 +1,5 @@
-import { serverEnv } from "../env/server-env";
-import { absoluteUrl } from "../lib/helpers";
+import { absoluteUrl } from "../helpers";
+import { serverEnv } from "./env/server-env";
 
 export const authConfig = {
   enableSignup: true,

@@ -14,7 +14,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
 import { InputPassword } from "~/components/ui-extension/input-password";
-import { appConfig } from "~/configs/app-config";
+import { siteConfig } from "~/site-config";
 
 import { AUTH_URI } from "../constants";
 import { SignInDto, SignInSchema } from "../schemas";
@@ -37,7 +37,7 @@ const SignInForm = ({ onSubmit }: Props) => {
 
   return (
     <AuthCard
-      headerTitle={`Login to ${appConfig.name}`}
+      headerTitle={`Login to ${siteConfig.name}`}
       headerDesc="Choose your preferred sign in method"
       buttonLabel="Don't have an account?"
       buttonHref={AUTH_URI.signUp}

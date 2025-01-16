@@ -1,4 +1,4 @@
-import { serverEnv } from "../env/server-env";
+import { serverEnv } from "./env/server-env";
 
 const currentYear = new Date().getFullYear().toString();
 const websiteLaunchYear = "2024";

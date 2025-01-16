@@ -1,21 +1,21 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { MockTransactionManagerService } from "~/.server/persistence/transaction-manager.mock";
-import { TransactionManagerService } from "~/.server/persistence/transaction-manger";
+import { DrizzleTransactionManager } from "~/.server/libs/db/drizzle-transaction-manger";
+import { MockTransactionManager } from "~/.server/libs/db/transaction-manager.mock";
 
 import { DI_SYMBOLS } from "../types";
 
-export function createTransactionManagerModule() {
+export function initTransactionModule() {
   const transactionManagerModule = createModule();
 
   if (process.env.NODE_ENV === "test") {
     transactionManagerModule
-      .bind(DI_SYMBOLS.ITransactionManagerService)
-      .toClass(MockTransactionManagerService);
+      .bind(DI_SYMBOLS.TransactionManagerService)
+      .toClass(MockTransactionManager);
   } else {
     transactionManagerModule
-      .bind(DI_SYMBOLS.ITransactionManagerService)
-      .toClass(TransactionManagerService);
+      .bind(DI_SYMBOLS.TransactionManagerService)
+      .toClass(DrizzleTransactionManager);
   }
 
   return transactionManagerModule;

@@ -1,7 +1,7 @@
 import { data } from "react-router";
 import { z } from "zod";
 
-import { HttpError, ValidationError } from "~/.server/domain/errors";
+import { HttpError, ValidationError } from "~/.server/libs/exceptions";
 
 import { Route } from "../+types/root";
 

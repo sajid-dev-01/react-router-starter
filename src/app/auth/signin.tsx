@@ -1,28 +1,37 @@
 import { createCookie, data, useFetcher } from "react-router";
 
-import { SignInSchema } from "~/.server/application/dtos/auth.dto";
 import { getInstance } from "~/.server/container";
-import { signInController } from "~/.server/infrastructure/modules/auth/controller";
 import SignInForm from "~/features/auth/components/sign-in";
+import { SignInSchema } from "~/features/auth/schemas";
 import { createActionHandler } from "~/lib/action-handler";
 
 import { Route } from "../+types";
 
 export async function action(args: Route.ActionArgs) {
-  const instrumentationService = getInstance("IInstrumentationService");
-  instrumentationService.instrumentServerAction(
+  const instrumentationService = getInstance("InstrumentationService");
+  return instrumentationService.instrumentServerAction(
     "signIn",
     { recordResponse: true },
     async () => {
       return createActionHandler({ args, schema: SignInSchema }).handle(
         async ({ json }) => {
+          const signInController = getInstance("SignInController");
           const { session, cookie } = await signInController(json);
-
-          if ("userId" in session) {
-            createCookie(cookie.name, cookie.attributes);
+          console.log(session, cookie);
+          if (!("userId" in session)) {
+            return data({ message: "Invalid" }, { status: 400 });
           }
 
-          return data({ message: "Sign in successfull" });
+          const signinCookie = createCookie(cookie.name, cookie.attributes);
+
+          return data(
+            { message: "Sign in successfull" },
+            {
+              headers: {
+                "Set-Cookie": await signinCookie.serialize(cookie.value),
+              },
+            }
+          );
         }
       );
     }

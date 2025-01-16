@@ -1,4 +1,4 @@
-import { serverEnv } from "../env/server-env";
+import { serverEnv } from "./env/server-env";
 
 export const emailConfig = {
   supportMailAddress: serverEnv.SUPPORT_MAIL_ADDRESS,

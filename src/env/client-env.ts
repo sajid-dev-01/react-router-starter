@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import { createEnv } from "./utils";
+import { createEnv } from "~/lib/helpers";
 
 const envSchema = z.object({
   APP_NAME: z.string(),

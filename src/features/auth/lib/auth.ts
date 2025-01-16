@@ -3,10 +3,7 @@ import "server-only";
 import { cache } from "react";
 import { GitHub, Google } from "arctic";
 
-import { authConfig } from "~/configs/auth-config";
-import { validateSessionToken } from "~/services/auth-service";
-
-import { getSessionToken } from "./session";
+import { authConfig } from "~/.server/configs/auth-config";
 
 export interface GoogleUser {
   sub: string;
@@ -32,13 +29,16 @@ export const googleAuth = new Google(
 );
 
 export const authenticate = cache(async () => {
-  const sessionToken = await getSessionToken();
+  return {
+    user: { id: "" },
+  };
+  // const sessionToken = await getSessionToken();
 
-  if (!sessionToken) return undefined;
+  // if (!sessionToken) return undefined;
 
-  const res = await validateSessionToken(sessionToken);
+  // const res = await validateSessionToken(sessionToken);
 
-  if (!res?.session) return undefined;
-
-  return res;
+  // if (!res?.session) return undefined;
+  //
+  // return res;
 });

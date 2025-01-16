@@ -12,7 +12,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
 import { InputPassword } from "~/components/ui-extension/input-password";
-import { appConfig } from "~/configs/app-config";
+import { siteConfig } from "~/site-config";
 
 import { AUTH_URI } from "../constants";
 import { SignUpPayload, SignUpSchema } from "../schemas";
@@ -44,7 +44,7 @@ const SignUp = () => {
 
   return (
     <AuthCard
-      headerTitle={`Register to ${appConfig.name}`}
+      headerTitle={`Register to ${siteConfig.name}`}
       headerDesc="Choose your preferred sign up method"
       buttonLabel="Already have an account?"
       buttonHref={AUTH_URI.signIn}
