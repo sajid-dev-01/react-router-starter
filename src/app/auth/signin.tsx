@@ -1,6 +1,6 @@
 import { createCookie, data, useFetcher } from "react-router";
 
-import { getInstance } from "~/.server/container";
+import { getInstance } from "~/.server/di";
 import SignInForm from "~/features/auth/components/sign-in";
 import { SignInSchema } from "~/features/auth/schemas";
 import { createActionHandler } from "~/lib/action-handler";

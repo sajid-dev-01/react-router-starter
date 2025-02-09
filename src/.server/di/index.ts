@@ -1,14 +1,15 @@
 import { createContainer } from "@evyweb/ioctopus";
 
-import { initAuthModule } from "~/.server/container/modules/auth.module";
-import { initTransactionModule } from "~/.server/container/modules/db.module";
-import { initEmailModule } from "~/.server/container/modules/email.module";
-import { initEncryptionModule } from "~/.server/container/modules/encryption.module";
-import { initMonitorModule } from "~/.server/container/modules/monitor.module";
-import { initRoleModule } from "~/.server/container/modules/role.module";
-import { initUserModule } from "~/.server/container/modules/user.module";
-import { DI_RETURN_TYPES, DI_SYMBOLS } from "~/.server/container/types";
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+
+import { initAuthModule } from "./modules/auth.module";
+import { initTransactionModule } from "./modules/db.module";
+import { initEmailModule } from "./modules/email.module";
+import { initEncryptionModule } from "./modules/encryption.module";
+import { initMonitorModule } from "./modules/monitor.module";
+import { initRoleModule } from "./modules/role.module";
+import { initUserModule } from "./modules/user.module";
+import { DI_RETURN_TYPES, DI_SYMBOLS } from "./types";
 
 const AppContainer = createContainer();
 
