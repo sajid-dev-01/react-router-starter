@@ -5,75 +5,21 @@ import { DBOperationError } from "~/.server/libs/exceptions";
 import { CrashReporterService } from "~/.server/libs/monitoring/crash-reporter/crash-reporter";
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
 
-import { RoleEntity, RoleName } from "./role";
-import { RoleCreateInput, RoleRepository } from "./role.repo";
+import { SessionEntity } from "./session";
+import { CreateSessionInput, SessionRepository } from "./session-repository";
 
-export class SqlRoleRepository implements RoleRepository {
+export class SqlSessionRepository implements SessionRepository {
   constructor(
     private readonly instrumentationService: InstrumentationService,
     private readonly crashReporterService: CrashReporterService
   ) {}
 
-  async findById(id: string): Promise<RoleEntity | undefined> {
+  async create(dto: CreateSessionInput): Promise<SessionEntity> {
     return await this.instrumentationService.startSpan(
-      { name: "RoleRepository > findById" },
+      { name: "SessionRepository > create" },
       async () => {
         try {
-          const query = db.query.roles.findFirst({
-            where: eq(table.roles.id, id),
-          });
-
-          const role = await this.instrumentationService.startSpan(
-            {
-              name: query.toSQL().sql,
-              op: "db.query",
-              attributes: { "db.system": "sqlite" },
-            },
-            () => query.execute()
-          );
-
-          return role;
-        } catch (err) {
-          this.crashReporterService.report(err);
-          throw err; // TODO: convert to Entities error
-        }
-      }
-    );
-  }
-
-  async findByName(name: RoleName): Promise<RoleEntity | undefined> {
-    return await this.instrumentationService.startSpan(
-      { name: "RoleRepository > findByEmail" },
-      async () => {
-        try {
-          const query = db.query.roles.findFirst({
-            where: eq(table.roles.name, name),
-          });
-
-          const role = await this.instrumentationService.startSpan(
-            {
-              name: query.toSQL().sql,
-              op: "db.query",
-              attributes: { "db.system": "sqlite" },
-            },
-            () => query.execute()
-          );
-
-          return role;
-        } catch (err) {
-          this.crashReporterService.report(err);
-          throw err; // TODO: convert to Entities error
-        }
-      }
-    );
-  }
-
-  async create(dto: RoleCreateInput): Promise<RoleEntity> {
-    return await this.instrumentationService.startSpan(
-      { name: "RoleRepository > create" },
-      async () => {
-        try {
-          const query = db.insert(table.roles).values(dto).returning();
+          const query = db.insert(table.sessions).values(dto).returning();
 
           const [created] = await this.instrumentationService.startSpan(
             {
@@ -87,8 +33,35 @@ export class SqlRoleRepository implements RoleRepository {
           if (created) {
             return created;
           } else {
-            throw new DBOperationError("Cannot create role.");
+            throw new DBOperationError("Cannot create session.");
           }
+        } catch (err) {
+          this.crashReporterService.report(err);
+          throw err; // TODO: convert to Entities error
+        }
+      }
+    );
+  }
+
+  async findById(id: string): Promise<SessionEntity | undefined> {
+    return await this.instrumentationService.startSpan(
+      { name: "SessionRepository > findByEmail" },
+      async () => {
+        try {
+          const query = db.query.sessions.findFirst({
+            where: eq(table.sessions.id, id),
+          });
+
+          const session = await this.instrumentationService.startSpan(
+            {
+              name: query.toSQL().sql,
+              op: "db.query",
+              attributes: { "db.system": "sqlite" },
+            },
+            () => query.execute()
+          );
+
+          return session;
         } catch (err) {
           this.crashReporterService.report(err);
           throw err; // TODO: convert to Entities error
@@ -99,16 +72,16 @@ export class SqlRoleRepository implements RoleRepository {
 
   async updateById(
     id: string,
-    dto: Partial<RoleCreateInput>
-  ): Promise<RoleEntity | undefined> {
+    dto: Partial<Omit<CreateSessionInput, "id" | "userId">>
+  ): Promise<SessionEntity | undefined> {
     return await this.instrumentationService.startSpan(
-      { name: "RoleRepository > updateById" },
+      { name: "SessionRepository > updateById" },
       async () => {
         try {
           const query = db
-            .update(table.roles)
+            .update(table.sessions)
             .set(dto)
-            .where(eq(table.roles.id, id))
+            .where(eq(table.sessions.id, id))
             .returning();
 
           const [updated] = await this.instrumentationService.startSpan(
@@ -123,7 +96,7 @@ export class SqlRoleRepository implements RoleRepository {
           if (updated) {
             return updated;
           } else {
-            throw new DBOperationError("Cannot update role.");
+            throw new DBOperationError("Cannot update session.");
           }
         } catch (err) {
           this.crashReporterService.report(err);
@@ -135,10 +108,12 @@ export class SqlRoleRepository implements RoleRepository {
 
   async deleteById(id: string): Promise<{ id: string }> {
     return await this.instrumentationService.startSpan(
-      { name: "RoleRepository > deleteById" },
+      { name: "SessionRepository > deleteById" },
       async () => {
         try {
-          const query = db.delete(table.roles).where(eq(table.roles.id, id));
+          const query = db
+            .delete(table.sessions)
+            .where(eq(table.sessions.id, id));
           const res = await this.instrumentationService.startSpan(
             {
               name: query.toSQL().sql,
@@ -151,7 +126,7 @@ export class SqlRoleRepository implements RoleRepository {
           if (res.rowsAffected) {
             return { id };
           } else {
-            throw new DBOperationError("Cannot update role.");
+            throw new DBOperationError("Cannot update session.");
           }
         } catch (err) {
           this.crashReporterService.report(err);

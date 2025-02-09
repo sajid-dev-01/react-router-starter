@@ -5,8 +5,6 @@ import { UserEntity } from "./user";
 type UserModel = typeof table.users.$inferSelect;
 
 export class UserMapper {
-  constructor() {}
-
   toDomain(model: UserModel) {
     return new UserEntity({
       id: model.id,

@@ -7,8 +7,8 @@ import { CrashReporterService } from "~/.server/libs/monitoring/crash-reporter/c
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
 
 import { UserEntity } from "./user";
-import { UserMapper } from "./user.mapper";
-import { UserRepository } from "./user.repo";
+import { UserMapper } from "./user-mapper";
+import { UserRepository } from "./user-repository";
 
 export class SqlUserRepository implements UserRepository {
   constructor(

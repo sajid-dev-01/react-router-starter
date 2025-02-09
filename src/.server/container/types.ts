@@ -1,9 +1,9 @@
 import {
   SignInController,
   SignUpController,
-} from "~/.server/features/auth/auth.controller";
-import { AuthenticationService } from "~/.server/features/auth/services/auth.service";
-import { OtpService } from "~/.server/features/auth/services/otp.service";
+} from "~/.server/features/auth/auth-controller";
+import { AuthenticationService } from "~/.server/features/auth/services/auth-service";
+import { OtpService } from "~/.server/features/auth/services/otp-service";
 import {
   ForgotPasswordUseCase,
   ResetPasswordUseCase,
@@ -12,13 +12,13 @@ import {
   SignUpUseCase,
   VerifyEmailUseCase,
 } from "~/.server/features/auth/use-cases";
-import { RoleRepository } from "~/.server/features/role/role.repo";
-import { SessionRepository } from "~/.server/features/session/session.repo";
-import { UserRepository } from "~/.server/features/user/user.repo";
-import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token.repo";
+import { RoleRepository } from "~/.server/features/role/role-repository";
+import { SessionRepository } from "~/.server/features/session/session-repository";
+import { UserRepository } from "~/.server/features/user/user-repository";
+import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token-repository";
 import { EncryptionService } from "~/.server/libs/cryptography/encryption";
 import { TransactionManager } from "~/.server/libs/db/transaction-manager";
-import { EmailService } from "~/.server/libs/email/email.service";
+import { EmailService } from "~/.server/libs/email/email-service";
 import { CrashReporterService } from "~/.server/libs/monitoring/crash-reporter/crash-reporter";
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
 import { Logger } from "~/.server/libs/monitoring/logger/logger";

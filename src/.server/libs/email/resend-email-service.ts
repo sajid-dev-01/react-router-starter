@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 import { emailConfig } from "~/.server/configs/email-config";
 
-import { EmailService } from "./email.service";
+import { EmailService } from "./email-service";
 
 export class ResendEmailService implements EmailService {
   private resend: Resend;

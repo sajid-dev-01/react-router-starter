@@ -4,10 +4,10 @@ import { serverEnv } from "~/.server/configs/env/server-env";
 import {
   signInController,
   signUpController,
-} from "~/.server/features/auth/auth.controller";
-import { MockAuthenticationService } from "~/.server/features/auth/services/auth.service.mock";
-import { CustomAuthenticationService } from "~/.server/features/auth/services/custom-auth.service";
-import { CustomOtpService } from "~/.server/features/auth/services/custom-otp.service";
+} from "~/.server/features/auth/auth-controller";
+import { CustomOtpService } from "~/.server/features/auth/services/custom-otp-service";
+import { MockAuthenticationService } from "~/.server/features/auth/services/mock-auth-service";
+import { MyAuthenticationService } from "~/.server/features/auth/services/my-auth-service";
 import {
   forgotPasswordUseCase,
   resetPasswordUseCase,
@@ -16,8 +16,8 @@ import {
   signUpUseCase,
   verifyEmailUseCase,
 } from "~/.server/features/auth/use-cases";
-import { SqlSessionRepository } from "~/.server/features/session/session.sql-repo";
-import { SqlVerifyTokenRepository } from "~/.server/features/verify-token/verify-token.sql-repo";
+import { SqlSessionRepository } from "~/.server/features/session/sql-session-repository";
+import { SqlVerifyTokenRepository } from "~/.server/features/verify-token/sql-verify-token-repository";
 
 import { DI_SYMBOLS } from "../types";
 
@@ -31,7 +31,7 @@ export function initAuthModule() {
   } else {
     authModule
       .bind(DI_SYMBOLS.AuthenticationService)
-      .toClass(CustomAuthenticationService, [
+      .toClass(MyAuthenticationService, [
         DI_SYMBOLS.OtpService,
         DI_SYMBOLS.UserRepository,
         DI_SYMBOLS.VerifyTokenRepository,

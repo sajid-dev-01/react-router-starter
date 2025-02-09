@@ -1,9 +1,9 @@
-import { UserRepository } from "~/.server/features/user/user.repo";
-import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token.repo";
+import { UserRepository } from "~/.server/features/user/user-repository";
+import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token-repository";
 import { NotFoundError, TokenError } from "~/.server/libs/exceptions";
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
 
-import { OtpService } from "../services/otp.service";
+import { OtpService } from "../services/otp-service";
 
 interface Input {
   otp: string;

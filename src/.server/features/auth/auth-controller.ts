@@ -1,6 +1,6 @@
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
 
-import { SignInDto, SignUpDto } from "./auth.dto";
+import { SignInDto, SignUpDto } from "./auth-dto";
 import { SignInUseCase, SignUpUseCase } from "./use-cases";
 
 export type SignUpController = ReturnType<typeof signUpController>;
@@ -11,7 +11,7 @@ export const signUpController =
   ) =>
   async (dto: SignUpDto) => {
     return await instrumentationService.startSpan(
-      { name: "signIn Controller" },
+      { name: "signUp Controller" },
       async () => {
         return signUpUseCase(dto);
       }

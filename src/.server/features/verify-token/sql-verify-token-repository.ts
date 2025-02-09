@@ -9,7 +9,7 @@ import { VerificationTokenEntity } from "./verify-token";
 import {
   CreateVerificationTokenDto,
   VerifyTokenRepository,
-} from "./verify-token.repo";
+} from "./verify-token-repository";
 
 export class SqlVerifyTokenRepository implements VerifyTokenRepository {
   constructor(

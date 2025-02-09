@@ -5,7 +5,7 @@ import { generateHOTP, verifyHOTP } from "@oslojs/otp";
 import { createRandomString } from "~/.server/helpers";
 import { EncryptionService } from "~/.server/libs/cryptography/encryption";
 
-import { OtpService } from "./otp.service";
+import { OtpService } from "./otp-service";
 
 export class CustomOtpService implements OtpService {
   constructor(private encryptionService: EncryptionService) {}

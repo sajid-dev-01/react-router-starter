@@ -4,18 +4,18 @@ import { appConfig } from "~/.server/configs/app-config";
 import { authConfig } from "~/.server/configs/auth-config";
 import { SESSION_COOKIE } from "~/.server/constants";
 import { SessionEntity } from "~/.server/features/session/session";
-import { SessionRepository } from "~/.server/features/session/session.repo";
+import { SessionRepository } from "~/.server/features/session/session-repository";
 import { UserEntity } from "~/.server/features/user/user";
-import { UserRepository } from "~/.server/features/user/user.repo";
-import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token.repo";
-import { EmailService } from "~/.server/libs/email/email.service";
+import { UserRepository } from "~/.server/features/user/user-repository";
+import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token-repository";
+import { EmailService } from "~/.server/libs/email/email-service";
 import { AuthenticationError } from "~/.server/libs/exceptions";
 import VerifyOTPEmail from "~/emails/verify-otp";
 
 import { Cookie } from "../cookie";
 import { generateSessionId, generateSessionToken } from "../utils";
-import { AuthenticationService } from "./auth.service";
-import { OtpService } from "./otp.service";
+import { AuthenticationService } from "./auth-service";
+import { OtpService } from "./otp-service";
 
 const SESSION_REFRESH_INTERVAL_MS = 1000 * 60 * 60 * 24 * 15; // 15 days
 const SESSION_MAX_DURATION_MS = SESSION_REFRESH_INTERVAL_MS * 2;

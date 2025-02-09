@@ -1,6 +1,6 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { ResendEmailService } from "~/.server/libs/email/resend-email.service";
+import { ResendEmailService } from "~/.server/libs/email/resend-email-service";
 
 import { DI_SYMBOLS } from "../types";
 

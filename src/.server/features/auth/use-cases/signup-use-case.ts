@@ -1,9 +1,9 @@
-import { RoleRepository } from "~/.server/features/role/role.repo";
-import { UserRepository } from "~/.server/features/user/user.repo";
+import { RoleRepository } from "~/.server/features/role/role-repository";
+import { UserRepository } from "~/.server/features/user/user-repository";
 import { HttpError } from "~/.server/libs/exceptions";
 import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
 
-import { AuthenticationService } from "../services/auth.service";
+import { AuthenticationService } from "../services/auth-service";
 
 interface Input {
   name: string;

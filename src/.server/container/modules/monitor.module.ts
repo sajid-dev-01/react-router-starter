@@ -1,8 +1,8 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { MockCrashReporterService } from "~/.server/libs/monitoring/crash-reporter/crash-reporter.mock";
+import { MockCrashReporterService } from "~/.server/libs/monitoring/crash-reporter/mock-crash-reporter";
 // import { SentryCrashReporterService } from "~/.server/libs/monitoring/crash-reporter/sentry-crash-reporter";
-import { MockInstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation.mock";
+import { MockInstrumentationService } from "~/.server/libs/monitoring/instrumentation/mock-instrumentation";
 // import { SentryInstrumentationService } from "~/.server/libs/monitoring/instrumentation/sentry-instrumentation";
 import { ConsoleLogger } from "~/.server/libs/monitoring/logger/console-logger";
 
