@@ -8,34 +8,34 @@ import { createActionHandler } from "~/lib/action-handler";
 import { Route } from "../+types";
 
 export async function action(args: Route.ActionArgs) {
-  const instrumentationService = getInstance("InstrumentationService");
-  return instrumentationService.instrumentServerAction(
-    "signIn",
-    { recordResponse: true },
-    async () => {
-      return createActionHandler({ args, schema: SignInSchema }).handle(
-        async ({ json }) => {
-          const signInController = getInstance("SignInController");
-          const { session, cookie } = await signInController(json);
-          console.log(session, cookie);
-          if (!("userId" in session)) {
-            return data({ message: "Invalid" }, { status: 400 });
-          }
+  // const instrumentationService = getInstance("InstrumentationService");
+  // return instrumentationService.instrumentServerAction(
+  //   "signIn",
+  //   { recordResponse: true },
+  //   async () => {
+  return createActionHandler({ args, schema: SignInSchema }).handle(
+    async ({ json }) => {
+      const signInController = getInstance("SignInController");
+      const { session, cookie } = await signInController(json);
+      console.log(session, cookie);
+      if (!("userId" in session)) {
+        return data({ error: { message: "Invalid" } }, { status: 400 });
+      }
 
-          const signinCookie = createCookie(cookie.name, cookie.attributes);
+      const signinCookie = createCookie(cookie.name, cookie.attributes);
 
-          return data(
-            { message: "Sign in successfull" },
-            {
-              headers: {
-                "Set-Cookie": await signinCookie.serialize(cookie.value),
-              },
-            }
-          );
+      return data(
+        { message: "Sign in successfull" },
+        {
+          headers: {
+            "Set-Cookie": await signinCookie.serialize(cookie.value),
+          },
         }
       );
     }
   );
+  // }
+  // );
 }
 
 export default function SigninPage() {

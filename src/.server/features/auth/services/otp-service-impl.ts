@@ -3,11 +3,11 @@ import { decodeBase64, encodeBase64 } from "@oslojs/encoding";
 import { generateHOTP, verifyHOTP } from "@oslojs/otp";
 
 import { createRandomString } from "~/.server/helpers";
-import { EncryptionService } from "~/.server/libs/cryptography/encryption";
+import { EncryptionService } from "~/.server/shared/cryptography/encryption";
 
 import { OtpService } from "./otp-service";
 
-export class CustomOtpService implements OtpService {
+export class OtpServiceImpl implements OtpService {
   constructor(private encryptionService: EncryptionService) {}
 
   generateHOTP() {

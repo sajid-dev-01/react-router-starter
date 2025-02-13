@@ -19,7 +19,7 @@ import {
   verifyEmailUseCase,
 } from "~/.server/features/auth/use-cases";
 
-const DI_SYMBOLS = {
+export const DI_SYMBOLS = {
   // Repositories
   RoleRepository: Symbol.for("RoleRepository"),
   UserRepository: Symbol.for("UserRepository"),
@@ -27,11 +27,8 @@ const DI_SYMBOLS = {
   VerifyTokenRepository: Symbol.for("VerifyTokenRepository"),
 
   // Services
-  Logger: Symbol.for("Logger"),
   InstrumentationService: Symbol.for("nstrumentationService"),
   CrashReporterService: Symbol.for("CrashReporterService"),
-  EmailService: Symbol.for("EmailService"),
-  TransactionManagerService: Symbol.for("TransactionManagerService"),
   AuthenticationService: Symbol.for("AuthenticationService"),
   EncryptionService: Symbol.for("EncryptionService"),
   OtpService: Symbol.for("OtpService"),

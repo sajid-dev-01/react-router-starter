@@ -1,15 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+import { GenericForm } from "~/components/form/generic-form";
+import { InputField } from "~/components/form/input-field";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
 
 import { AUTH_URI } from "../constants";
@@ -39,36 +32,21 @@ const ForgotPassword = () => {
       buttonLabel="Back to login"
       buttonHref={AUTH_URI.signIn}
     >
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit((v) => console.log(v))}
-          className="space-y-6"
-        >
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john@example.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <ButtonLoading type="submit" loading={isPending} className="w-full">
-            Send reset link
-          </ButtonLoading>
-        </form>
-      </Form>
+      <GenericForm {...form} onSubmit={console.log}>
+        <div className="space-y-4">
+          <InputField
+            form={form}
+            name="email"
+            label="Email"
+            isPending={isPending}
+            type="email"
+            placeholder="jhon@example.com"
+          />
+        </div>
+        <ButtonLoading type="submit" loading={isPending} className="w-full">
+          Send reset link
+        </ButtonLoading>
+      </GenericForm>
     </AuthCard>
   );
 };

@@ -1,22 +1,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "~/components/ui/input-otp";
+import { GenericForm } from "~/components/form/generic-form";
+import { OtpField } from "~/components/form/otp-field";
+import { PasswordField } from "~/components/form/password-field";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
-import { InputPassword } from "~/components/ui-extension/input-password";
 
 import { AUTH_URI } from "../constants";
 import { ResetPasswordPayload, ResetPasswordSchema } from "../schemas";
@@ -48,79 +36,26 @@ const ResetPassword = () => {
       buttonLabel="Don't have an account?"
       buttonHref={AUTH_URI.signUp}
     >
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit((v) => console.log(v))}
-          className="space-y-6"
-        >
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <InputPassword
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="passwordConfirmation"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password Confirmation</FormLabel>
-                  <FormControl>
-                    <InputPassword
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="otp"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>OTP code</FormLabel>
-                  <FormControl>
-                    <InputOTP {...field} maxLength={6}>
-                      <InputOTPGroup>
-                        <InputOTPSlot index={0} />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                      </InputOTPGroup>
-                      <InputOTPSeparator />
-                      <InputOTPGroup>
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                      </InputOTPGroup>
-                    </InputOTP>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <ButtonLoading type="submit" loading={isPending} className="w-full">
-            Change Password
-          </ButtonLoading>
-        </form>
-      </Form>
+      <GenericForm {...form} onSubmit={console.log}>
+        <div className="space-y-4">
+          <PasswordField form={form} name="password" isPending={isPending} />
+          <PasswordField
+            form={form}
+            name="passwordConfirmation"
+            label="Password Confirmation"
+            isPending={isPending}
+          />
+          <OtpField
+            form={form}
+            name="otp"
+            label="OTP Code"
+            isPending={isPending}
+          />
+        </div>
+        <ButtonLoading type="submit" loading={isPending} className="w-full">
+          Change Password
+        </ButtonLoading>
+      </GenericForm>
     </AuthCard>
   );
 };

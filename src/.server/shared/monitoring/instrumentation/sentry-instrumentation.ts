@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/nextjs";
+import * as Sentry from "@sentry/node";
 
 import { InstrumentationService } from "./instrumentation";
 
@@ -10,11 +10,11 @@ export class SentryInstrumentationService implements InstrumentationService {
     return Sentry.startSpan(options, callback);
   }
 
-  instrumentServerAction<T>(
-    name: string,
-    options: Record<string, any>,
-    callback: () => T
-  ): Promise<T> {
-    return Sentry.withServerActionInstrumentation(name, options, callback);
-  }
+  // instrumentServerAction<T>(
+  //   name: string,
+  //   options: Record<string, any>,
+  //   callback: () => T
+  // ): Promise<T> {
+  //   return Sentry.withServerActionInstrumentation(name, options, callback);
+  // }
 }

@@ -1,4 +1,5 @@
-import { db, DrizzleTransaction } from ".";
+import { db, DrizzleTransaction } from "~/.server/db";
+
 import { TransactionManager } from "./transaction-manager";
 
 export class DrizzleTransactionManager implements TransactionManager {

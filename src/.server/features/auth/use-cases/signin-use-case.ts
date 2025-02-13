@@ -1,10 +1,11 @@
-import { UserRepository } from "~/.server/features/user/user-repository";
+import { UserRepository } from "~/.server/features/user/repositories/user-repository";
 import {
   HttpError,
   NotFoundError,
   NotVerifiedError,
-} from "~/.server/libs/exceptions";
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+  ValidationError,
+} from "~/.server/shared/exceptions";
+import { InstrumentationService } from "~/.server/shared/monitoring/instrumentation/instrumentation";
 
 import { AuthenticationService } from "../services/auth-service";
 
@@ -26,7 +27,7 @@ export const signInUseCase =
       async () => {
         const existingUser = await userRepository.findByEmail(dto.email);
         if (!existingUser || !existingUser.password) {
-          throw new NotFoundError();
+          throw new ValidationError({ email: ["Not found"] });
         }
 
         if (!existingUser.emailVerified) {

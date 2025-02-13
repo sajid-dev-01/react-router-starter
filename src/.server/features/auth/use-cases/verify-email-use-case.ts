@@ -1,8 +1,8 @@
-import { UserRepository } from "~/.server/features/user/user-repository";
-import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token-repository";
-import { NotFoundError, TokenError } from "~/.server/libs/exceptions";
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+import { UserRepository } from "~/.server/features/user/repositories/user-repository";
+import { NotFoundError, TokenError } from "~/.server/shared/exceptions";
+import { InstrumentationService } from "~/.server/shared/monitoring/instrumentation/instrumentation";
 
+import { VerifyTokenRepository } from "../repositories/verify-token-repository";
 import { AuthenticationService } from "../services/auth-service";
 import { OtpService } from "../services/otp-service";
 

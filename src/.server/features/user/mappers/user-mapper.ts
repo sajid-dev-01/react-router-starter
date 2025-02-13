@@ -1,6 +1,6 @@
-import { table } from "~/.server/libs/db";
+import { table } from "~/.server/db";
 
-import { UserEntity } from "./user";
+import { UserEntity } from "../user";
 
 type UserModel = typeof table.users.$inferSelect;
 
@@ -10,12 +10,12 @@ export class UserMapper {
       id: model.id,
       name: model.name,
       email: model.email,
-      emailVerified: model.emailVerified,
-      image: model.image,
       roleId: model.roleId,
-      password: model.password,
       createdAt: model.createdAt,
       updatedAt: model.updatedAt,
+      image: model.image ?? undefined,
+      password: model.password ?? undefined,
+      emailVerified: model.emailVerified ?? undefined,
     });
   }
 
@@ -24,12 +24,12 @@ export class UserMapper {
       id: domain.id,
       name: domain.name,
       email: domain.email,
-      emailVerified: domain.emailVerified || null,
-      image: domain.image || null,
       roleId: domain.roleId,
-      password: domain.password || null,
       createdAt: domain.createdAt,
       updatedAt: domain.updatedAt,
+      password: domain.password || null,
+      image: domain.image || null,
+      emailVerified: domain.emailVerified || null,
     };
   }
 

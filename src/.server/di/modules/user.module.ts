@@ -1,7 +1,7 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { SqlUserRepository } from "~/.server/features/user/sql-user-repository";
-import { UserMapper } from "~/.server/features/user/user-mapper";
+import { UserMapper } from "~/.server/features/user/mappers/user-mapper";
+import { SqlUserRepository } from "~/.server/features/user/repositories/sql-user-repository";
 
 import { DI_SYMBOLS } from "../types";
 

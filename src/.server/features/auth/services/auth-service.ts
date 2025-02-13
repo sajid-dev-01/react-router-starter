@@ -1,6 +1,6 @@
-import { SessionEntity } from "../../session/session";
 import { UserEntity } from "../../user/user";
 import { Cookie } from "../cookie";
+import { SessionEntity } from "../session";
 
 export interface AuthenticationService {
   validatePasswords(args: { password: string; hash: string }): Promise<boolean>;

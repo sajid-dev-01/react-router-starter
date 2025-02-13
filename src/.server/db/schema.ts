@@ -5,7 +5,7 @@ import {
   text,
 } from "drizzle-orm/sqlite-core";
 
-import { RoleName } from "~/.server/features/role/role";
+import { RoleName } from "~/.server/features/user/role";
 import {
   AccountType,
   OAuthProvider,

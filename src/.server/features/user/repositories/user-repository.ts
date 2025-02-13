@@ -1,4 +1,4 @@
-import { UserEntity } from "./user";
+import { UserEntity } from "../user";
 
 export interface UserCreateInput
   extends Omit<UserEntity, "id" | "createdAt" | "updatedAt"> {}

@@ -1,4 +1,4 @@
-import { VerificationTokenEntity } from "./verify-token";
+import { VerificationTokenEntity } from "../verify-token";
 
 export interface CreateVerificationTokenDto extends VerificationTokenEntity {}
 

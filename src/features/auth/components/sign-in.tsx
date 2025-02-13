@@ -2,18 +2,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { GenericForm } from "~/components/form/generic-form";
+import { InputField } from "~/components/form/input-field";
+import { PasswordField } from "~/components/form/password-field";
 import { Button } from "~/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
-import { InputPassword } from "~/components/ui-extension/input-password";
 import { siteConfig } from "~/site-config";
 
 import { AUTH_URI } from "../constants";
@@ -43,61 +36,30 @@ const SignInForm = ({ onSubmit }: Props) => {
       buttonHref={AUTH_URI.signUp}
       showSocial
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john@example.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex items-center justify-between">
-                    <FormLabel>Password</FormLabel>
-                    <Button
-                      size="sm"
-                      variant="link"
-                      className="h-auto p-0 font-normal text-blue-500"
-                      asChild
-                    >
-                      <Link to={AUTH_URI.forgotPassword}>Forgot password?</Link>
-                    </Button>
-                  </div>
-                  <FormControl>
-                    <InputPassword
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Enter password"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <ButtonLoading type="submit" loading={isPending} className="w-full">
-            Login
-          </ButtonLoading>
-        </form>
-      </Form>
+      <GenericForm {...form} onSubmit={(data) => onSubmit(data)}>
+        <div className="space-y-4">
+          <InputField
+            form={form}
+            name="email"
+            label="Email"
+            isPending={isPending}
+            type="email"
+            placeholder="jhon@example.com"
+          />
+          <PasswordField form={form} name="password" isPending={isPending} />
+          <Button
+            size="sm"
+            variant="link"
+            className="h-0 p-0 font-normal text-blue-500"
+            asChild
+          >
+            <Link to={AUTH_URI.forgotPassword}>Forgot password?</Link>
+          </Button>
+        </div>
+        <ButtonLoading type="submit" loading={isPending} className="w-full">
+          Login
+        </ButtonLoading>
+      </GenericForm>
     </AuthCard>
   );
 };

@@ -1,4 +1,4 @@
-import { SessionEntity } from "./session";
+import { SessionEntity } from "../session";
 
 export interface CreateSessionInput {
   id: string;

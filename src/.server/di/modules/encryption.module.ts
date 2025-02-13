@@ -1,7 +1,7 @@
 import { createModule } from "@evyweb/ioctopus";
 
 import { serverEnv } from "~/.server/configs/env/server-env";
-import { CustomEncryptionService } from "~/.server/libs/cryptography/encryption-service";
+import { CustomEncryptionService } from "~/.server/shared/cryptography/encryption-service";
 
 import { DI_SYMBOLS } from "../types";
 

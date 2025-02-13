@@ -1,6 +1,6 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { SqlRoleRepository } from "~/.server/features/role/sql-role-repository";
+import { SqlRoleRepository } from "~/.server/features/user/repositories/sql-role-repository";
 
 import { DI_SYMBOLS } from "../types";
 

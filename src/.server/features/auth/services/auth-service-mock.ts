@@ -3,16 +3,16 @@ import bcrypt from "bcryptjs";
 import { appConfig } from "~/.server/configs/app-config";
 import { authConfig } from "~/.server/configs/auth-config";
 import { SESSION_COOKIE } from "~/.server/constants";
-import { SessionEntity } from "~/.server/features/session/session";
-import { SessionRepository } from "~/.server/features/session/session-repository";
+import { UserRepository } from "~/.server/features/user/repositories/user-repository";
 import { UserEntity } from "~/.server/features/user/user";
-import { UserRepository } from "~/.server/features/user/user-repository";
-import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token-repository";
-import { EmailService } from "~/.server/libs/email/email-service";
-import { AuthenticationError } from "~/.server/libs/exceptions";
+import { EmailService } from "~/.server/shared/email/email-service";
+import { AuthenticationError } from "~/.server/shared/exceptions";
 import VerifyOTPEmail from "~/emails/verify-otp";
 
 import { Cookie } from "../cookie";
+import { SessionRepository } from "../repositories/session-repository";
+import { VerifyTokenRepository } from "../repositories/verify-token-repository";
+import { SessionEntity } from "../session";
 import { generateSessionId, generateSessionToken } from "../utils";
 import { AuthenticationService } from "./auth-service";
 import { OtpService } from "./otp-service";
@@ -20,7 +20,7 @@ import { OtpService } from "./otp-service";
 const SESSION_REFRESH_INTERVAL_MS = 1000 * 60 * 60 * 24 * 15; // 15 days
 const SESSION_MAX_DURATION_MS = SESSION_REFRESH_INTERVAL_MS * 2;
 
-export class MockAuthenticationService implements AuthenticationService {
+export class AuthenticationServiceMock implements AuthenticationService {
   constructor(
     private readonly otpService: OtpService,
     private readonly emailService: EmailService,

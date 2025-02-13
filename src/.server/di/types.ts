@@ -12,16 +12,17 @@ import {
   SignUpUseCase,
   VerifyEmailUseCase,
 } from "~/.server/features/auth/use-cases";
-import { RoleRepository } from "~/.server/features/role/role-repository";
-import { SessionRepository } from "~/.server/features/session/session-repository";
-import { UserRepository } from "~/.server/features/user/user-repository";
-import { VerifyTokenRepository } from "~/.server/features/verify-token/verify-token-repository";
-import { EncryptionService } from "~/.server/libs/cryptography/encryption";
-import { TransactionManager } from "~/.server/libs/db/transaction-manager";
-import { EmailService } from "~/.server/libs/email/email-service";
-import { CrashReporterService } from "~/.server/libs/monitoring/crash-reporter/crash-reporter";
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
-import { Logger } from "~/.server/libs/monitoring/logger/logger";
+import { TransactionManager } from "~/.server/shared/transaction/transaction-manager";
+
+import { SessionRepository } from "../features/auth/repositories/session-repository";
+import { VerifyTokenRepository } from "../features/auth/repositories/verify-token-repository";
+import { RoleRepository } from "../features/user/repositories/role-repository";
+import { UserRepository } from "../features/user/repositories/user-repository";
+import { EncryptionService } from "../shared/cryptography/encryption";
+import { EmailService } from "../shared/email/email-service";
+import { CrashReporterService } from "../shared/monitoring/crash-reporter/crash-reporter";
+import { InstrumentationService } from "../shared/monitoring/instrumentation/instrumentation";
+import { Logger } from "../shared/monitoring/logger/logger";
 
 export const DI_SYMBOLS = {
   // Repositories

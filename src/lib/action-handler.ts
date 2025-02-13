@@ -1,7 +1,7 @@
 import { data } from "react-router";
 import { z } from "zod";
 
-import { HttpError, ValidationError } from "~/.server/libs/exceptions";
+import { HttpError, ValidationError } from "~/.server/shared/exceptions";
 
 import { Route } from "../+types/root";
 
@@ -60,19 +60,28 @@ export const createActionHandler = <
       } catch (e) {
         if (e instanceof ValidationError) {
           return data(
-            { name: e.name, message: e.message, fieldErrors: e.fieldErrors },
+            {
+              error: {
+                name: e.name,
+                message: e.message,
+                fieldErrors: e.fieldErrors,
+              },
+            },
             { status: e.statusCode }
           );
         }
 
         if (e instanceof HttpError) {
           return data(
-            { name: e.name, message: e.message },
+            { error: { name: e.name, message: e.message } },
             { status: e.statusCode }
           );
         }
 
-        return data({ message: SERVER_ERROR_MESSSAGE }, { status: 500 });
+        return data(
+          { error: { message: SERVER_ERROR_MESSSAGE } },
+          { status: 500 }
+        );
       }
     },
   };

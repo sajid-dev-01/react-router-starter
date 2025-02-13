@@ -1,17 +1,9 @@
 import { useForm } from "react-hook-form";
-import { Form as ActionForm } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
+import { GenericForm } from "~/components/form/generic-form";
+import { PasswordField } from "~/components/form/password-field";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
-import { InputPassword } from "~/components/ui-extension/input-password";
 
 import { ConfirmPasswordPayload, ConfirmPasswordSchema } from "../schemas";
 import AuthCard from "./auth-card";
@@ -38,44 +30,20 @@ const ConfirmPassword = () => {
 
   return (
     <AuthCard headerTitle="Confirm your password">
-      <Form {...form}>
-        <ActionForm
-          onSubmit={form.handleSubmit((v) => console.log(v))}
-          className="space-y-6"
-        >
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <InputPassword {...field} disabled={isPending} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="passwordConfirmation"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password Confirmation</FormLabel>
-                  <FormControl>
-                    <InputPassword {...field} disabled={isPending} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <ButtonLoading type="submit" loading={isPending} className="w-full">
-            Confirm
-          </ButtonLoading>
-        </ActionForm>
-      </Form>
+      <GenericForm {...form} onSubmit={console.log}>
+        <div className="space-y-4">
+          <PasswordField form={form} name="password" isPending={isPending} />
+          <PasswordField
+            form={form}
+            name="passwordConfirmation"
+            label="Password Confirmation"
+            isPending={isPending}
+          />
+        </div>
+        <ButtonLoading type="submit" loading={isPending} className="w-full">
+          Confirm
+        </ButtonLoading>
+      </GenericForm>
     </AuthCard>
   );
 };

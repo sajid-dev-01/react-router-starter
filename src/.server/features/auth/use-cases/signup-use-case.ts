@@ -1,7 +1,7 @@
-import { RoleRepository } from "~/.server/features/role/role-repository";
-import { UserRepository } from "~/.server/features/user/user-repository";
-import { HttpError } from "~/.server/libs/exceptions";
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+import { RoleRepository } from "~/.server/features/user/repositories/role-repository";
+import { UserRepository } from "~/.server/features/user/repositories/user-repository";
+import { HttpError } from "~/.server/shared/exceptions";
+import { InstrumentationService } from "~/.server/shared/monitoring/instrumentation/instrumentation";
 
 import { AuthenticationService } from "../services/auth-service";
 

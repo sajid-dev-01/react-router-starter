@@ -1,4 +1,4 @@
-import { RoleEntity, RoleName } from "./role";
+import { RoleEntity, RoleName } from "../role";
 
 export interface RoleCreateInput
   extends Omit<RoleEntity, "id" | "createdAt" | "updatedAt"> {}

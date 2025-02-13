@@ -1,4 +1,4 @@
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+import { InstrumentationService } from "~/.server/shared/monitoring/instrumentation/instrumentation";
 
 import { SignInDto, SignUpDto } from "./auth-dto";
 import { SignInUseCase, SignUpUseCase } from "./use-cases";

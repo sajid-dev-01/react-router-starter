@@ -1,17 +1,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+import { GenericForm } from "~/components/form/generic-form";
+import { InputField } from "~/components/form/input-field";
+import { PasswordField } from "~/components/form/password-field";
 import { ButtonLoading } from "~/components/ui-extension/button-loading";
-import { InputPassword } from "~/components/ui-extension/input-password";
 import { siteConfig } from "~/site-config";
 
 import { AUTH_URI } from "../constants";
@@ -50,68 +43,29 @@ const SignUp = () => {
       buttonHref={AUTH_URI.signIn}
       showSocial
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Jhon Doe"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john@example.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <InputPassword
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <ButtonLoading type="submit" loading={isPending} className="w-full">
-            Register
-          </ButtonLoading>
-        </form>
-      </Form>
+      <GenericForm {...form} onSubmit={handleSubmit}>
+        <div className="space-y-4">
+          <InputField
+            form={form}
+            name="name"
+            label="Name"
+            isPending={isPending}
+            placeholder="Jhon Doe"
+          />
+          <InputField
+            form={form}
+            name="email"
+            label="Email"
+            isPending={isPending}
+            type="email"
+            placeholder="jhon@example.com"
+          />
+          <PasswordField form={form} name="password" isPending={isPending} />
+        </div>
+        <ButtonLoading type="submit" loading={isPending} className="w-full">
+          Register
+        </ButtonLoading>
+      </GenericForm>
     </AuthCard>
   );
 };

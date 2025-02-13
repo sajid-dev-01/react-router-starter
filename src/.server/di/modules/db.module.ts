@@ -1,7 +1,7 @@
 import { createModule } from "@evyweb/ioctopus";
 
-import { DrizzleTransactionManager } from "~/.server/libs/db/drizzle-transaction-manger";
-import { MockTransactionManager } from "~/.server/libs/db/transaction-manager.mock";
+import { DrizzleTransactionManager } from "~/.server/shared/transaction/drizzle-transaction-manger";
+import { MockTransactionManager } from "~/.server/shared/transaction/transaction-manager.mock";
 
 import { DI_SYMBOLS } from "../types";
 

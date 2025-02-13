@@ -1,5 +1,5 @@
-import { UserRepository } from "~/.server/features/user/user-repository";
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+import { UserRepository } from "~/.server/features/user/repositories/user-repository";
+import { InstrumentationService } from "~/.server/shared/monitoring/instrumentation/instrumentation";
 
 import { AuthenticationService } from "../services/auth-service";
 

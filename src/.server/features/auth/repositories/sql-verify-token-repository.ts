@@ -1,11 +1,11 @@
 import { eq } from "drizzle-orm";
 
-import { db, table } from "~/.server/libs/db";
-import { DBOperationError } from "~/.server/libs/exceptions";
-import { CrashReporterService } from "~/.server/libs/monitoring/crash-reporter/crash-reporter";
-import { InstrumentationService } from "~/.server/libs/monitoring/instrumentation/instrumentation";
+import { db, table } from "~/.server/db";
+import { DBOperationError } from "~/.server/shared/exceptions";
+import { CrashReporterService } from "~/.server/shared/monitoring/crash-reporter/crash-reporter";
+import { InstrumentationService } from "~/.server/shared/monitoring/instrumentation/instrumentation";
 
-import { VerificationTokenEntity } from "./verify-token";
+import { VerificationTokenEntity } from "../verify-token";
 import {
   CreateVerificationTokenDto,
   VerifyTokenRepository,
