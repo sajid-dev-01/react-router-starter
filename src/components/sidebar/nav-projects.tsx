@@ -1,4 +1,3 @@
-import { NavLink } from "react-router";
 import {
   Folder,
   Forward,
@@ -6,6 +5,7 @@ import {
   MoreHorizontal,
   Trash2,
 } from "lucide-react";
+import { NavLink } from "react-router";
 
 import {
   DropdownMenu,

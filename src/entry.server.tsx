@@ -1,11 +1,11 @@
+import { createReadableStreamFromReadable } from "@react-router/node";
+import { isbot } from "isbot";
+import { PassThrough } from "node:stream";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 import type { AppLoadContext, EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import { type HandleErrorFunction } from "react-router";
-import { createReadableStreamFromReadable } from "@react-router/node";
-import { isbot } from "isbot";
-import { PassThrough } from "node:stream";
 
 export const handleError: HandleErrorFunction = (error, { request }) => {
   // React Router may abort some interrupted requests, don't log those
@@ -41,7 +41,7 @@ export default function handleRequest(
       <ServerRouter
         context={routerContext}
         url={request.url}
-      // abortDelay={ABORT_DELAY}
+        // abortDelay={ABORT_DELAY}
       />,
       {
         [readyOption]() {
